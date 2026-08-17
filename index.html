@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fun Trip Countdown</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            rgba(3, 10, 18, 0.35),
+            rgba(3, 10, 18, 0.70)
+        ),
+        url("trip-background.png") center/cover no-repeat fixed;
+
+    overflow: hidden;
+}
+
+/* Main glass card */
+.card {
+    position: relative;
+    width: min(1200px, 94vw);
+    padding: clamp(25px, 4vw, 55px);
+
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 28px;
+
+    background: rgba(4, 12, 21, 0.35);
+    backdrop-filter: blur(6px);
+
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+}
+
+/* Heading */
+.kicker {
+    text-align: center;
+    font-size: clamp(14px, 2vw, 22px);
+    letter-spacing: 0.35em;
+}
+
+.title {
+    text-align: center;
+    margin: 8px 0 0;
+
+    font-size: clamp(48px, 8vw, 105px);
+    font-weight: 900;
+
+    color: #ffb82e;
+
+    text-shadow:
+        0 5px 25px rgba(0,0,0,0.4);
+}
+
+.subtitle {
+    text-align: center;
+    margin: 5px 0 35px;
+
+    font-size: clamp(13px, 1.8vw, 21px);
+    letter-spacing: 0.16em;
+}
+
+/* Trip date */
+.start {
+    text-align: center;
+
+    color: #ffb82e;
+
+    font-size: clamp(14px, 2vw, 21px);
+    font-weight: bold;
+
+    letter-spacing: 0.18em;
+}
+
+.date {
+    text-align: center;
+
+    font-size: clamp(30px, 5vw, 62px);
+    font-weight: 800;
+
+    margin: 10px 0 26px;
+}
+
+/* Countdown */
+.grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+.box {
+    text-align: center;
+
+    padding: 20px 10px;
+
+    background: rgba(5,12,19,0.72);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+    border-radius: 17px;
+}
+
+.num {
+    font-size: clamp(42px, 7vw, 78px);
+
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+.label {
+    margin-top: 9px;
+
+    color: #ffb82e;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+/* Today */
+.today {
+    width: max-content;
+    max-width: 100%;
+
+    margin: 20px auto 0;
+
+    padding: 11px 20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+    border-radius: 999px;
+
+    background: rgba(0,0,0,0.35);
+
+    font-size: clamp(13px,1.7vw,18px);
+
+    letter-spacing: 0.08em;
+}
+
+.today b {
+    color: #ffb82e;
+}
+
+/* Message */
+.message {
+    text-align: center;
+
+    font-size: clamp(20px,3vw,34px);
+
+    font-style: italic;
+
+    margin: 24px 0 12px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+
+    font-size: 12px;
+
+    letter-spacing: 0.18em;
+
+    opacity: 0.85;
+}
+
+/* Mobile */
+@media(max-width:700px) {
+
+    .card {
+        padding: 22px 16px;
+
+        border-radius: 20px;
+    }
+
+    .grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .date {
+        margin-bottom: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="card">
+
+    <div class="kicker">
+        TRACK YOUR
+    </div>
+
+    <div class="title">
+        FUN TRIP
+    </div>
+
+    <div class="subtitle">
+        ADVENTURE AWAITS · MEMORIES FOREVER
+    </div>
+
+
+    <div class="start">
+        TRIP STARTS ON
+    </div>
+
+    <div class="date">
+        29 SEPTEMBER
+    </div>
+
+
+    <!-- COUNTDOWN -->
+
+    <section class="grid">
+
+        <div class="box">
+            <div class="num" id="days">
+                --
+            </div>
+
+            <div class="label">
+                DAYS
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="num" id="hours">
+                --
+            </div>
+
+            <div class="label">
+                HOURS
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="num" id="minutes">
+                --
+            </div>
+
+            <div class="label">
+                MINUTES
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="num" id="seconds">
+                --
+            </div>
+
+            <div class="label">
+                SECONDS
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- TODAY -->
+
+    <div class="today">
+
+        TODAY IS
+
+        <b id="today">
+            17 AUGUST 2026
+        </b>
+
+    </div>
+
+
+    <div class="message">
+        Let the adventure begin!
+    </div>
+
+
+    <div class="footer">
+
+        EXPLORE
+        &nbsp; · &nbsp;
+
+        CAPTURE
+        &nbsp; · &nbsp;
+
+        EXPERIENCE
+        &nbsp; · &nbsp;
+
+        DISCOVER
+        &nbsp; · &nbsp;
+
+        ENJOY
+
+    </div>
+
+</main>
+
+
+<script>
+
+/*
+   TRIP DATE
+
+   29 September 2026
+*/
+
+const target =
+    new Date(
+        "2026-09-29T00:00:00+05:30"
+    );
+
+
+function updateCountdown() {
+
+    const now =
+        new Date();
+
+    let diff =
+        target - now;
+
+
+    /*
+       If the trip has started
+    */
+
+    if (diff <= 0) {
+
+        document
+            .querySelector(".date")
+            .textContent =
+            "THE ADVENTURE HAS BEGUN!";
+
+        document
+            .getElementById("days")
+            .textContent = "∞";
+
+        document
+            .getElementById("hours")
+            .textContent = "∞";
+
+        document
+            .getElementById("minutes")
+            .textContent = "∞";
+
+        document
+            .getElementById("seconds")
+            .textContent = "∞";
+
+        return;
+    }
+
+
+    /*
+       Convert ms to
+       days, hours, mins, secs
+    */
+
+    const days =
+        Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const hours =
+        Math.floor(
+            (diff % (1000 * 60 * 60 * 24))
+            /
+            (1000 * 60 * 60)
+        );
+
+    const minutes =
+        Math.floor(
+            (diff % (1000 * 60 * 60))
+            /
+            (1000 * 60)
+        );
+
+    const seconds =
+        Math.floor(
+            (diff % (1000 * 60))
+            /
+            1000
+        );
+
+
+    /*
+       Update DOM
+    */
+
+    document
+        .getElementById("days")
+        .textContent =
+        String(days)
+        .padStart(2, "0");
+
+    document
+        .getElementById("hours")
+        .textContent =
+        String(hours)
+        .padStart(2, "0");
+
+    document
+        .getElementById("minutes")
+        .textContent =
+        String(minutes)
+        .padStart(2, "0");
+
+    document
+        .getElementById("seconds")
+        .textContent =
+        String(seconds)
+        .padStart(2, "0");
+
+}
+
+
+/*
+   Update today's date
+*/
+
+const today =
+    new Date();
+
+const options = {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+};
+
+document
+    .getElementById("today")
+    .textContent =
+    today
+    .toLocaleDateString(
+        "en-GB",
+        options
+    )
+    .toUpperCase();
+
+
+/*
+   Run countdown
+*/
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+</script>
+
+</body>
+</html>
