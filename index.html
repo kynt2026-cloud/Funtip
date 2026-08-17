@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Trip Countdown</title>
+    <title>Hyderabad Trip Countdown</title>
     <style>
         * {
             margin: 0;
@@ -40,12 +40,30 @@
             backdrop-filter: blur(10px);
         }
 
+        .kicker {
+            text-align: center;
+            font-size: 20px;
+            color: #ffb82e;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
         h1 {
             text-align: center;
             font-size: 64px;
-            margin: 20px 0;
+            margin: 10px 0 5px 0;
             color: #ffb82e;
             text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .location {
+            text-align: center;
+            font-size: 32px;
+            color: #00f2fe;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
@@ -131,6 +149,10 @@
             h1 {
                 font-size: 40px;
             }
+
+            .location {
+                font-size: 24px;
+            }
             
             .countdown {
                 grid-template-columns: repeat(2, 1fr);
@@ -145,12 +167,13 @@
 </head>
 <body>
     <div class="container">
-        <div class="trip-date">TRACK YOUR</div>
+        <div class="kicker">TRACK YOUR TRIP TO</div>
         <h1>FUN TRIP</h1>
+        <div class="location">🏙️ HYDERABAD 🏙️</div>
         <div class="subtitle">ADVENTURE AWAITS · MEMORIES FOREVER</div>
 
         <div class="trip-date">TRIP STARTS ON</div>
-        <div class="date-value">29 SEPTEMBER</div>
+        <div class="date-value">29 SEPTEMBER 3:00 PM</div>
 
         <div class="countdown">
             <div class="countdown-item">
@@ -175,7 +198,7 @@
             TODAY IS <strong id="today">17 AUGUST 2026</strong>
         </div>
 
-        <div class="message">Let the adventure begin!</div>
+        <div class="message">Get ready for an amazing journey to Hyderabad!</div>
 
         <div class="footer">
             EXPLORE · CAPTURE · EXPERIENCE · DISCOVER · ENJOY
@@ -183,7 +206,7 @@
     </div>
 
     <script>
-        const tripDate = new Date("2026-09-29").getTime();
+        const tripDate = new Date("2026-09-29T15:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
